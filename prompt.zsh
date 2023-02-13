@@ -30,6 +30,42 @@ function venv_info() {
 # Run `venv_info` before prompt is displayed (precmd)
 add-zsh-hook precmd venv_info
 
+# Update vi mode (RPROMPT) before input line is redrawn
+function line_pre_redraw() {
+    local _previous_vi_mode="${VI_MODE}"
+
+    case "${KEYMAP}" in
+        vicmd)
+            case "${REGION_ACTIVE}" in
+                1)
+                    VI_MODE="[VISUAL]"
+                    ;;
+                2)
+                    VI_MODE="[V-LINE]"
+                    ;;
+                *)
+                    # VI_MODE="NORMAL"
+                    VI_MODE="%F{220}%B◆%b%f"
+                    ;;
+            esac
+            ;;
+        viins|main)
+            if [[ "${ZLE_STATE}" == *overwrite* ]]; then
+                VI_MODE="[REPLACE]"
+            else
+                # VI_MODE="INSERT"
+                VI_MODE="%F{39}%B◇%b%f"
+            fi
+            ;;
+    esac
+
+    if [[ "${VI_MODE}" != "${_previous_vi_mode}" ]]; then
+        RPROMPT="${VI_MODE}"
+        zle reset-prompt
+    fi
+}
+add-zle-hook-widget zle-line-pre-redraw line_pre_redraw
+
 # Create prompt
 () {
   if [[ $({tput colors} 2>/dev/null) == 256 ]]
