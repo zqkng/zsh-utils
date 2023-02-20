@@ -1,0 +1,13 @@
+###############################################################################
+# Function: background
+# --------------------
+# Opens one or more programs with the specified file(s) in the background.
+# Used as a helper function for suffix aliases.
+#
+###############################################################################
+
+background() {
+  for (( i=2; i<=$#; i++ )); do
+    ${@[1]} ${@[$i]} &> /dev/null &
+  done
+}
