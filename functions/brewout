@@ -1,0 +1,17 @@
+###############################################################################
+# function: brewout
+# ------------------
+# Uninstall (one or multiple) selected application(s), using `brew leaves` as
+#  source input and displayed with `fzf`.
+#
+###############################################################################
+
+brewout() {
+  local uninstall=$(brew leaves | fzf -m)
+
+  if [[ $uninstall ]]; then
+    for pkg in $(echo $uninstall); do;
+      brew uninstall $pkg;
+    done;
+  fi
+}

@@ -1,0 +1,17 @@
+###############################################################################
+# function: brewin[stall]
+# -----------------------
+# Install (one or multiple) selected application(s), using `brew search` as
+#  source input and displayed with `fzf`.
+#
+###############################################################################
+
+brewin() {
+  local install=$(brew search "${@}" | fzf -m)
+
+  if [[ $install ]]; then
+    for pkg in $(echo $install); do;
+      brew install $pkg;
+    done;
+  fi
+}

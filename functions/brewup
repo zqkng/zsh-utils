@@ -1,0 +1,17 @@
+###############################################################################
+# function: brewup[date]
+# ----------------------
+# Update (one or multiple) selected application(s), using `brew leaves` as
+#  source input and displayed with `fzf`.
+#
+###############################################################################
+
+brewup() {
+  local update=$(brew leaves | fzf -m)
+
+  if [[ $update ]]; then
+    for pkg in $(echo $update); do;
+      brew upgrade $pkg;
+    done;
+  fi
+}
