@@ -1,0 +1,20 @@
+###############################################################################
+# function: tmuxkillf
+# -------------------
+# Lists all open `tmux` sessions (except the current one) and allows user to
+#   multi-select the sessions to kill.
+#
+###############################################################################
+
+tmuxkillf() {
+  local target_sessions current_session
+  current_session=$(tmux display-message -p '#S')
+  target_sessions=$(tmux ls | \
+                    cut -d: -f1 | \
+                    sed "/${current_session}/d" | \
+                    fzf --multi --exit-0) || return $?
+
+  for session in ${(f@)target_sessions}; do
+    tmux kill-session -t "${session}"
+  done
+}
