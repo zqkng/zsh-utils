@@ -1,0 +1,15 @@
+###############################################################################
+# function: workon
+# ----------------
+# Source the Python virtual environment with the given name
+# (fuzzy searching using `fzf`).
+#
+###############################################################################
+
+workon() {
+  local venv=$(fd -d 1 "$1" "$VIRTUAL_ENV_DIR" | fzf)
+
+  if [[ $venv ]]; then
+    source "$venv"bin/activate
+  fi
+}

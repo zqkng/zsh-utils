@@ -1,0 +1,19 @@
+###############################################################################
+# function: pyvenv
+# ----------------
+# Source the Python virtual environment (with the given name or for the current
+# project directory); create a new virtual environment if it does not already
+# exist, using the current Python executable.
+#
+###############################################################################
+
+pyvenv() {
+  local env_name="$(basename $(pwd))"
+  if [ ! -z "$1" ]; then
+    env_name="$1"
+  fi
+  if [ ! -d "$VIRTUAL_ENV_DIR"/"$env_name" ]; then
+    python -m venv --prompt "$env_name" "$VIRTUAL_ENV_DIR"/"$env_name"
+  fi
+  source "$VIRTUAL_ENV_DIR"/"$env_name"/bin/activate
+}
