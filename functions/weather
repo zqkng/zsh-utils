@@ -1,0 +1,14 @@
+###############################################################################
+# Function: weather
+# -----------------
+# Check wttr.in for current weather information.
+# Query parameters:
+#   City: curl wttr.in/Los+Angeles
+#   Airport: curl wttr.in/LAX
+#   Landmark: curl wttr.in/~Hollywood+Sign
+#
+###############################################################################
+
+weather() { 
+  curl "https://wttr.in/${1}";
+}

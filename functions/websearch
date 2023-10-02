@@ -1,0 +1,34 @@
+################################################################################
+# Function: websearch
+# -------------------
+# Search the web from the command-line (default: opens Firefox).
+#
+###############################################################################
+
+websearch() {
+  if [ $# -lt 2 ];then
+    echo "Usage: websearch <www-site> <query-parameters>"
+    return
+  fi
+
+  www="$1"
+  query="${@:2}"
+
+  case "$www" in
+    google)
+      open -a firefox "https://www.google.com/search?q=$query"
+    ;;
+    reddit)
+      open -a firefox "https://www.google.com/search?q=site:reddit.com $query"
+    ;;
+    wiki)
+      open -a firefox "https://en.wikipedia.com/wiki/$query"
+    ;;
+    youtube)
+      open -a firefox "https://www.youtube.com/results?search_query=$query"
+    ;;
+    *)
+      echo "WEBSEARCH SUPPORTS: {google, reddit, wiki, youtube}"
+    ;;
+  esac
+}
