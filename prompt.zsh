@@ -1,7 +1,10 @@
 ###############################################################################
 # ~/.zsh/zshrc.d/prompt.zsh
 # -------------------------
-# Prompt configurations for zsh
+# Prompt configurations for zsh.
+#
+# LEFT PROMPT: (pyvenv)[user@hostname: ~/pwd](git:branch){#jobs}
+# RIGHT PROMPT: VI_MODE="NORMAL" or VI_MODE="INSERT"
 #
 ###############################################################################
 

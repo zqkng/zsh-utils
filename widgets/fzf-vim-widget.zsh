@@ -1,8 +1,8 @@
 ###############################################################################
 # ~/.zsh/zshrc.d/fzf-vim-widget.zsh
 # ---------------------------------
-# Select file(s) that match the (optional) pattern with `fzf` and
-#   open with `vim`.
+# Select file(s) that match the (optional) pattern with `fzf` 
+# and open them with `vim`.
 #
 ###############################################################################
 
